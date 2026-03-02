@@ -21,13 +21,6 @@ class User extends Authenticatable
         'phone',
         'phone_2',
         'profile_picture',
-        'two_factor_enabled',
-        'two_factor_code',
-        'two_factor_expires_at',
-        'session_timeout',
-        'is_maintenance',
-        'is_banned',
-        'maintenance_message',
     ];
 
     protected $hidden = [
@@ -46,20 +39,7 @@ class User extends Authenticatable
        Two Factor Helpers
     ========================== */
 
-    public function generateTwoFactorCode()
-    {
-        $this->two_factor_code = rand(100000, 999999);
-        $this->two_factor_expires_at = now()->addMinutes(60);
-        $this->save();
-    }
-
-    public function resetTwoFactorCode()
-    {
-        $this->two_factor_code = null;
-        $this->two_factor_expires_at = null;
-        $this->save();
-    }
-
+ 
     /* =========================
        Profile Image Helpers
     ========================== */
@@ -85,16 +65,4 @@ class User extends Authenticatable
             : asset('uploads/images/default.jpg');
     }
 
-    /* =========================
-       Password Decryption
-    ========================== */
-
-    public function getDecryptedPasswordAttribute()
-    {
-        try {
-            return Crypt::decryptString($this->password);
-        } catch (\Exception $e) {
-            return null;
-        }
-    }
 }
