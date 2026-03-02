@@ -1,19 +1,32 @@
 @extends('frontend.layouts.app')
 
-@section('title', 'DFCH - Dr. Fazlul Haque Colorectal Hospital Limited')
+@section('title', 'Lifeline City Hospital')
 <link href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
-
 @section('content')
+    {{-- Header --}}
     @include('frontend.welcome_page.header')
+
+    {{-- Hero Banner --}}
     @include('frontend.welcome_page.banner')
-    {{-- @include('frontend.welcome_page.glance')
-    @include('frontend.welcome_page.medicine') --}}
+
+    {{-- About Lifeline City Hospital --}}
     @include('frontend.welcome_page.about')
+
+    {{-- Our Departments --}}
     @include('frontend.welcome_page.department')
-    @include('frontend.welcome_page.facilities')
-    @include('frontend.welcome_page.stat')
+
+    {{-- Hospital Services --}}
     @include('frontend.welcome_page.services')
+
+    {{-- Our Facilities --}}
+    @include('frontend.welcome_page.facilities')
+
+    {{-- Our Specialist Doctors --}}
     @include('frontend.welcome_page.specialist')
-    @include('frontend.welcome_page.goals')
+
+    {{-- Hospital Statistics --}}
+    @include('frontend.welcome_page.stat')
+
+    {{-- Footer --}}
     @include('frontend.welcome_page.footer')
 @endsection

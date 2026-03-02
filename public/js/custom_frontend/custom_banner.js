@@ -1,15 +1,11 @@
 document.addEventListener("DOMContentLoaded", function () {
     const slider = document.getElementById("slider");
-
-    // ✅ Stop if slider does not exist (other pages)
     if (!slider) return;
 
     let currentIndex = 0;
     const slides = slider.querySelectorAll(".slide");
     const dots = slider.querySelectorAll(".dot");
-    const link = document.getElementById("doctorLink");
 
-    // ✅ Stop if no slides
     if (slides.length === 0) return;
 
     function showSlide(index) {
@@ -21,33 +17,21 @@ document.addEventListener("DOMContentLoaded", function () {
             dot.classList.toggle("active", i === index);
         });
 
-        if (link) {
-            const route = slides[index].dataset.route;
-
-            if (route) {
-                link.href = route;
-                link.style.pointerEvents = "auto";
-            } else {
-                link.href = "javascript:void(0)";
-                link.style.pointerEvents = "none";
-            }
-        }
-
         currentIndex = index;
     }
 
     function nextSlide() {
-        showSlide((currentIndex + 1) % slides.length);
-    }
-
-    function prevSlide() {
-        showSlide((currentIndex - 1 + slides.length) % slides.length);
+        let newIndex = (currentIndex + 1) % slides.length;
+        showSlide(newIndex);
     }
 
     window.goToSlide = function (index) {
         showSlide(index);
     };
 
-    setInterval(nextSlide, 15000);
+    // Auto slide every 5 seconds
+    setInterval(nextSlide, 5000);
+
+    // Initialize first slide
     showSlide(0);
 });
