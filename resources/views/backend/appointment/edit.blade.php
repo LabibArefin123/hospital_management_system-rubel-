@@ -15,9 +15,7 @@
             <form action="{{ route('appointments.update', $appointment->id) }}" method="POST">
                 @csrf
                 @method('PUT')
-
                 <div class="row">
-
                     <div class="form-group col-md-6 mb-3">
                         <label>Patient *</label>
                         <select name="patient_id" class="form-control">

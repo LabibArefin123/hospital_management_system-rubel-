@@ -16,7 +16,7 @@
                 @csrf
                 <div class="row">
 
-                    <div class="form-group col-md-6 mb-3">
+                    <div class="form-group col-md-6">
                         <label>Patient *</label>
                         <select name="patient_id" class="form-control">
                             @foreach ($patients as $patient)
@@ -25,17 +25,17 @@
                         </select>
                     </div>
 
-                    <div class="form-group col-md-4 mb-3">
+                    <div class="form-group col-md-6 ">
                         <label>Consultation Fee</label>
                         <input type="number" name="consultation_fee" class="form-control">
                     </div>
 
-                    <div class="form-group col-md-4 mb-3">
+                    <div class="form-group col-md-6 ">
                         <label>Medicine Charge</label>
                         <input type="number" name="medicine_charge" class="form-control">
                     </div>
 
-                    <div class="form-group col-md-4 mb-3">
+                    <div class="form-group col-md-6 ">
                         <label>Test Charge</label>
                         <input type="number" name="test_charge" class="form-control">
                     </div>

@@ -21,7 +21,16 @@ class DashboardController extends Controller
 
     public function index()
     {
-        return view('backend.dashboard');
+        $totalPatients = Patient::count();
+        $totalDoctors = Doctor::count();
+        $totalAppointments = Appointment::count();
+        $totalBills = Bill::count();
+        return view('backend.dashboard', compact(
+            'totalDoctors',
+            'totalPatients',
+            'totalAppointments',
+            'totalBills'
+        ));
     }
 
 
@@ -195,85 +204,5 @@ class DashboardController extends Controller
             '<span style="color:#ff6b6b;">$1</span>',
             e($text)
         );
-    }
-
-    public function system_index()
-    {
-        // -----------------------------
-        // Total Users
-        // -----------------------------
-        $totalUsers = User::count();
-
-        // -----------------------------
-        // Table Row Counts + Last Updated Time
-        // -----------------------------
-        $dbName = DB::getDatabaseName();
-
-        $tables = DB::select("
-            SELECT 
-                TABLE_NAME,
-                UPDATE_TIME
-            FROM information_schema.tables
-            WHERE table_schema = ?
-        ", [$dbName]);
-
-        $tableCounts = [];
-        $totalRecords = 0;
-
-        foreach ($tables as $table) {
-            $tableName = $table->TABLE_NAME;
-
-            if (in_array($tableName, ['migrations', 'failed_jobs'])) {
-                continue;
-            }
-
-            $count = DB::table($tableName)->count();
-
-            $tableCounts[$tableName] = [
-                'count' => $count,
-                'updated_at' => $table->UPDATE_TIME
-                    ? date('Y-m-d H:i:s', strtotime($table->UPDATE_TIME))
-                    : null,
-            ];
-
-            $totalRecords += $count;
-        }
-
-
-        // -----------------------------
-        // Database Size
-        // -----------------------------
-        $dbSize = DB::selectOne("
-            SELECT 
-                ROUND(SUM(data_length + index_length) / 1024 / 1024, 2) AS size
-            FROM information_schema.tables
-            WHERE table_schema = ?
-        ", [$dbName]);
-
-        $databaseSize = $dbSize->size ?? 0;
-
-        // -----------------------------
-        // Last Backup Time
-        // -----------------------------
-        $backupDir = storage_path('app/backups');
-        $lastBackupTime = 'No backup found';
-
-        if (File::exists($backupDir)) {
-            $files = collect(File::files($backupDir))
-                ->filter(fn($file) => strtolower($file->getExtension()) === 'sql');
-
-            if ($files->isNotEmpty()) {
-                $latestFile = $files->sortByDesc(fn($f) => $f->getMTime())->first();
-                $lastBackupTime = date('Y-m-d H:i:s', $latestFile->getMTime());
-            }
-        }
-
-        return view('backend.system_dashboard', compact(
-            'totalUsers',
-            'totalRecords',
-            'tableCounts',
-            'databaseSize',
-            'lastBackupTime'
-        ));
     }
 }

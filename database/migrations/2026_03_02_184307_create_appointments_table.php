@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('patient_id')->nullable()->index();
             $table->date('appointment_date');
             $table->time('appointment_time');
-            $table->string('status')->nullable();
+            $table->string('status')->nullable(); //['Pending', 'Approved', 'Completed']
             $table->timestamps();
         });
     }

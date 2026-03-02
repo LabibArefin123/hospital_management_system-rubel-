@@ -30,13 +30,20 @@ class AppointmentController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'doctor_id'         => 'required',
-            'patient_id'        => 'required',
-            'appointment_date'  => 'required|date',
-            'appointment_time'  => 'required',
+            'doctor_id'        => 'required|exists:doctors,id',
+            'patient_id'       => 'required|exists:patients,id',
+            'appointment_date' => 'required|date',
+            'appointment_time' => 'required',
+            'status'           => 'required|in:Pending,Approved,Completed',
         ]);
 
-        Appointment::create($request->all());
+        Appointment::create($request->only([
+            'doctor_id',
+            'patient_id',
+            'appointment_date',
+            'appointment_time',
+            'status',
+        ]));
 
         return redirect()->route('appointments.index')
             ->with('success', 'Appointment created successfully.');
@@ -49,7 +56,7 @@ class AppointmentController extends Controller
 
     public function edit(Appointment $appointment)
     {
-        $doctors  = Doctor::all();
+        $doctors  = Doctor::where('is_available', 1)->get();
         $patients = Patient::all();
 
         return view('backend.appointment.edit', compact('appointment', 'doctors', 'patients'));
@@ -58,10 +65,20 @@ class AppointmentController extends Controller
     public function update(Request $request, Appointment $appointment)
     {
         $request->validate([
-            'status' => 'required',
+            'doctor_id'        => 'required|exists:doctors,id',
+            'patient_id'       => 'required|exists:patients,id',
+            'appointment_date' => 'required|date',
+            'appointment_time' => 'required',
+            'status'           => 'required|in:Pending,Approved,Completed',
         ]);
 
-        $appointment->update($request->all());
+        $appointment->update($request->only([
+            'doctor_id',
+            'patient_id',
+            'appointment_date',
+            'appointment_time',
+            'status',
+        ]));
 
         return redirect()->route('appointments.index')
             ->with('success', 'Appointment updated successfully.');

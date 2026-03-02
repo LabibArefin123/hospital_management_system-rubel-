@@ -19,8 +19,12 @@
                     <div class="form-group col-md-6 mb-3">
                         <label>Patient *</label>
                         <select name="patient_id" class="form-control">
+                            <option value="">-- Select Patient --</option>
                             @foreach ($patients as $patient)
-                                <option value="{{ $patient->id }}">{{ $patient->name }}</option>
+                                <option value="{{ $patient->id }}"
+                                    {{ old('patient_id') == $patient->id ? 'selected' : '' }}>
+                                    {{ $patient->name }}
+                                </option>
                             @endforeach
                         </select>
                     </div>
@@ -28,23 +32,39 @@
                     <div class="form-group col-md-6 mb-3">
                         <label>Doctor *</label>
                         <select name="doctor_id" class="form-control">
+                            <option value="">-- Select Doctor --</option>
                             @foreach ($doctors as $doctor)
-                                <option value="{{ $doctor->id }}">{{ $doctor->name }}</option>
+                                <option value="{{ $doctor->id }}" {{ old('doctor_id') == $doctor->id ? 'selected' : '' }}>
+                                    {{ $doctor->name }}
+                                </option>
                             @endforeach
                         </select>
                     </div>
 
                     <div class="form-group col-md-6 mb-3">
                         <label>Date *</label>
-                        <input type="date" name="appointment_date" class="form-control">
+                        <input type="date" name="appointment_date" class="form-control"
+                            value="{{ old('appointment_date') }}">
                     </div>
 
                     <div class="form-group col-md-6 mb-3">
                         <label>Time *</label>
-                        <input type="time" name="appointment_time" class="form-control">
+                        <input type="time" name="appointment_time" class="form-control"
+                            value="{{ old('appointment_time') }}">
+                    </div>
+
+                    <div class="form-group col-md-6 mb-3">
+                        <label>Status *</label>
+                        <select name="status" class="form-control">
+                            @foreach (['Pending', 'Approved', 'Completed'] as $status)
+                                <option value="{{ $status }}" {{ old('status') == $status ? 'selected' : '' }}>
+                                    {{ $status }}</option>
+                            @endforeach
+                        </select>
                     </div>
 
                 </div>
+
                 <button class="btn btn-success px-4">Create Appointment</button>
             </form>
         </div>
