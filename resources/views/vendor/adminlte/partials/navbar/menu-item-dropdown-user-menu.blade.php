@@ -40,13 +40,6 @@
         </li>
 
         <li>
-            <a href="{{ route('settings.index') }}" class="dropdown-item d-flex align-items-center gap-2">
-                <i class="fa fa-cog text-secondary"></i>
-                <span>Settings</span>
-            </a>
-        </li>
-
-        <li>
             <a href="#" class="dropdown-item d-flex align-items-center gap-2 text-danger"
                 onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                 <i class="fa fa-power-off"></i>

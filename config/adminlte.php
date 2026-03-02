@@ -16,7 +16,7 @@ return [
     |
     */
 
-    'title' => 'DFCH - Dr. Fazlul Haque Colorectal Hospital Limited',
+    'title' => 'Lifeline City Hospital',
     'title_prefix' => '',
     'title_postfix' => '',
 
@@ -64,12 +64,12 @@ return [
     | https://github.com/jeroennoten/Laravel-AdminLTE/wiki/Basic-Configuration
     |
     */
-    'logo' => '<span class="brand-text brand-text-hidden">BidTrack</span>',
-    'logo_img' => 'uploads/images/logo_wide.JPG',
-    'logo_img_class' => 'bidtrack-logo', // <- use your custom class
+    'logo' => '<b>Lifeline City Hospital</b>',
+    'logo_img' => null,
+    'logo_img_class' => null,
     'logo_img_xl' => null,
-    'logo_img_xl_class' => 'brand-image-xs',
-    'logo_img_alt' => 'BidTrack Logo',
+    'logo_img_xl_class' => null,
+    'logo_img_alt' => null,
 
     /*
     |--------------------------------------------------------------------------
@@ -308,8 +308,6 @@ return [
     |
     */
 
-
-
     'menu' => [
         // Navbar items:
         [
@@ -323,59 +321,10 @@ return [
             'input_name' => 'term',
         ],
 
-
         [
             'type' => 'fullscreen-widget',
             'topnav_right' => true,
         ],
-
-        // [
-        //     'text' => '',
-        //     'icon' => 'fas fa-bell position-relative',
-        //     'topnav_right' => true,
-        //     'id' => 'notificationBell',
-        //     'submenu' => [
-        //         [
-        //             'text' => 'Tender List (0)',
-        //             'icon' => 'fas fa-list',             // Left icon
-        //             'right_icon' => 'fas fa-file-alt',   // Right icon
-        //             'label_color' => 'info',
-        //         ],
-        //         [
-        //             'text' => 'Tender Participated Offer Validity List (0)',
-        //             'icon' => 'fas fa-clock',
-        //             'right_icon' => 'fas fa-hourglass-half',
-        //             'label_color' => 'warning',
-        //         ],
-        //         [
-        //             'text' => 'Bid Guarantee (BG) List (0)',
-        //             'icon' => 'fas fa-shield-alt',
-        //             'right_icon' => 'fas fa-exclamation-circle text-warning',
-        //             'label_color' => 'primary',
-        //         ],
-        //         [
-        //             'text' => 'Tender Awarded Delivery Date List (0)',
-        //             'icon' => 'fas fa-trophy',
-        //             'right_icon' => 'fas fa-calendar-day',
-        //             'label_color' => 'primary',
-        //         ],
-        //         [
-        //             'text' => 'Performance Guarantee (PG) List (0)',
-        //             'icon' => 'fas fa-certificate',
-        //             'right_icon' => 'fas fa-shield-alt',
-        //             'label_color' => 'success',
-        //         ],
-        //     ],
-        //     'label' => null,
-        //     'label_color' => 'danger',
-        // ],
-
-        [
-            'type' => 'navbar-item',
-            'topnav_right' => true,
-            'view' => 'partials.navbar.messages', // Use 'view' instead of 'text'
-        ],
-
 
         // Sidebar items:
 
@@ -390,13 +339,6 @@ return [
             'text' => 'Dashboard',
             'route' => 'dashboard',
             'icon' => 'fas fa-fw fa-user',
-        ],
-
-        [
-            'text' => 'System Dashboard',
-            'route' => 'dashboard.system',
-            'can' => 'dashboard.system',
-            'icon' => 'fas fa-home',
         ],
 
         [
@@ -415,70 +357,55 @@ return [
         ],
 
         [
-            'text'    => 'Patient Management',
-            'icon'    => 'fas fa-user-injured',
+            'text'    => 'Doctor Management',
+            'icon'    => 'fas fa-user-md',
             'submenu' => [
-
+                [
+                    'text'  => 'Doctor List',
+                    'route' => 'doctors.index',
+                    'can'   => 'doctors.index',
+                    'icon'  => 'fas fa-list',
+                ],
+            ],
+        ],
+        [
+            'text'    => 'Patient Management',
+            'icon'    => 'fas fa-user-procedures',
+            'submenu' => [
                 [
                     'text'  => 'Patient List',
                     'route' => 'patients.index',
                     'can'   => 'patients.index',
                     'icon'  => 'fas fa-list',
                 ],
-
-                [
-                    'text'  => 'Add New Patient',
-                    // 'route' => 'patients.create',
-                    // 'can'   => 'patients.create',
-                    'icon'  => 'fas fa-user-plus',
-                ],
-
-                [
-                    'text'  => 'Recommended Patients',
-                    'route' => 'patients.recommend',
-                    'can'   => 'patients.recommend',
-                    'icon'  => 'fas fa-list',
-                ],
-
-                [
-                    'text'  => 'Patient Documents',
-                    // 'route' => 'patient-documents.index',
-                    // 'can'   => 'patient-documents.index',
-                    'icon'  => 'fas fa-file-medical',
-                ],
-
             ],
         ],
         [
-            'text' => 'Report Management',
-            'icon' => 'fas fa-file-alt',
+            'text'    => 'Appointment Manage',
+            'icon'    => 'fas fa-calender-check',
             'submenu' => [
                 [
-                    'text' => 'Daily Patient Report',
-                    'route' => 'report.daily',
-                    'can' => 'report.daily',
-                    'icon' => 'fas fa-calendar-day',
-                ],
-                [
-                    'text' => 'Weekly Patient Report',
-                    'route' => 'report.weekly',
-                    'can' => 'report.weekly',
-                    'icon' => 'fas fa-calendar-day',
-                ],
-                [
-                    'text' => 'Monthly Patient Report',
-                    'route' => 'report.monthly',
-                    'can' => 'report.monthly',
-                    'icon' => 'fas fa-calendar-day',
-                ],
-                [
-                    'text' => 'Yearly Patient Report',
-                    'route' => 'report.yearly',
-                    'can' => 'report.yearly',
-                    'icon' => 'fas fa-calendar-day',
+                    'text'  => 'Appointment List',
+                    'route' => 'appointments.index',
+                    'can'   => 'appointments.index',
+                    'icon'  => 'fas fa-list',
                 ],
             ],
         ],
+
+        [
+            'text'    => 'Bill Management',
+            'icon'    => 'fas fa-file-invoice-dollar',
+            'submenu' => [
+                [
+                    'text'  => 'Bill List',
+                    'route' => 'bills.index',
+                    'can'   => 'bills.index',
+                    'icon'  => 'fas fa-list',
+                ],
+            ],
+        ],
+
 
         [
             'text'    => 'Setting Management',
@@ -504,20 +431,6 @@ return [
                     'can' => 'system_users.index',
                     'active' => ['system_users*'],
                     'icon' => 'fas fa-users-cog',  // users with cog icon
-                ],
-                [
-                    'text' => 'Ban Users',
-                    'route' => 'ban_users.index',
-                    'can' => 'ban_users.index',
-                    'active' => ['ban_users*'],
-                    'icon' => 'fas fa-user-slash',
-                ],
-                [
-                    'text' => 'System Problems',
-                    'route' => 'system_problems.index',
-                    'can' => 'system_problems.index',
-                    'active' => ['system_problems*'],
-                    'icon' => 'fas fa-bug',
                 ],
             ],
         ],

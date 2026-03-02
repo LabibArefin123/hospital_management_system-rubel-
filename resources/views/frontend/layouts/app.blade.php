@@ -27,10 +27,6 @@
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
     <link rel="stylesheet" href="{{ asset('css/frontend/frontend.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/frontend/modals/custom_contact_modal.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/frontend/modals/custom_land_modal.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/frontend/modals/custom_email_modal.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/frontend/modals/custom_location_modal.css') }}">
 </head>
 
 <body>
@@ -55,13 +51,6 @@
             once: true, // Only animate once
         });
     </script>
-
-    @include('frontend.modal.custom_phone')
-    @include('frontend.modal.custom_land_phone')
-    @include('frontend.modal.footer.phone')
-    @include('frontend.modal.footer.land_phone')
-    @include('frontend.modal.footer.email')
-    @include('frontend.modal.footer.location')
 
     <!-- Back to Top Button -->
     <button id="backToTop" class="back-to-top" aria-label="Back to Top">
