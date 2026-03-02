@@ -2,63 +2,76 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Controller;
+use App\Models\Appointment;
+use App\Models\Doctor;
+use App\Models\Patient;
 use Illuminate\Http\Request;
 
 class AppointmentController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $appointments = Appointment::with(['doctor', 'patient'])
+            ->latest()
+            ->paginate(10);
+
+        return view('backend.appointment.index', compact('appointments'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        $doctors  = Doctor::where('is_available', 1)->get();
+        $patients = Patient::all();
+
+        return view('backend.appointment.create', compact('doctors', 'patients'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'doctor_id'         => 'required',
+            'patient_id'        => 'required',
+            'appointment_date'  => 'required|date',
+            'appointment_time'  => 'required',
+        ]);
+
+        Appointment::create($request->all());
+
+        return redirect()->route('appointments.index')
+            ->with('success', 'Appointment created successfully.');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function show(Appointment $appointment)
     {
-        //
+        return view('backend.appointment.show', compact('appointment'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function edit(Appointment $appointment)
     {
-        //
+        $doctors  = Doctor::all();
+        $patients = Patient::all();
+
+        return view('backend.appointment.edit', compact('appointment', 'doctors', 'patients'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Appointment $appointment)
     {
-        //
+        $request->validate([
+            'status' => 'required',
+        ]);
+
+        $appointment->update($request->all());
+
+        return redirect()->route('appointments.index')
+            ->with('success', 'Appointment updated successfully.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+    public function destroy(Appointment $appointment)
     {
-        //
+        $appointment->delete();
+
+        return redirect()->route('appointments.index')
+            ->with('success', 'Appointment deleted successfully.');
     }
 }

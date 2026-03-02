@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Patient;
-use Illuminate\Support\Facades\Auth;
+use App\Models\Bill;
+use App\Models\Doctor;
+use App\Models\Appointment;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
@@ -82,51 +84,100 @@ class DashboardController extends Controller
 
         $results = [];
 
-        /* ==========================
-       Try to parse date
-    ========================== */
+        // Try parse date (for appointments/bills)
         $parsedDate = null;
         try {
             $parsedDate = Carbon::parse($term)->format('Y-m-d');
         } catch (\Exception $e) {
-            // ignore
+            $parsedDate = null;
         }
 
         /* ==========================
-       Patient Query
+       1️⃣ Patients
     ========================== */
         $patients = Patient::query()
-            ->where(function ($q) use ($term) {
-                $q->where('patient_name', 'like', "%{$term}%")
+            ->where(function ($q) use ($term, $parsedDate) {
+                $q->where('name', 'like', "%{$term}%")
                     ->orWhere('patient_code', 'like', "%{$term}%")
-                    ->orWhere('phone_1', 'like', "%{$term}%")
-                    ->orWhere('phone_2', 'like', "%{$term}%")
-                    ->orWhere('phone_f_1', 'like', "%{$term}%")
-                    ->orWhere('phone_m_1', 'like', "%{$term}%")
-                    ->orWhere('patient_f_name', 'like', "%{$term}%")
-                    ->orWhere('patient_m_name', 'like', "%{$term}%")
-                    ->orWhere('district', 'like', "%{$term}%")
-                    ->orWhere('city', 'like', "%{$term}%");
+                    ->orWhere('phone', 'like', "%{$term}%")
+                    ->orWhere('address', 'like', "%{$term}%")
+                    ->orWhere('blood_group', 'like', "%{$term}%");
+
+                if ($parsedDate) {
+                    $q->orWhereDate('created_at', $parsedDate);
+                }
             })
-            ->when($parsedDate, function ($q) use ($parsedDate) {
-                $q->orWhereDate('date_of_patient_added', $parsedDate);
-            })
-            ->limit(15)
+            ->latest()
+            ->limit(10)
             ->get();
 
-        /* ==========================
-       Build Results
-    ========================== */
-        foreach ($patients as $patient) {
-
-            $name = $this->highlightMatch($patient->patient_name, $term);
-            $code = $this->highlightMatch($patient->patient_code, $term);
-            $fathers_name = $this->highlightMatch($patient->patient_f_name, $term);
-            $mothers_name = $this->highlightMatch($patient->patient_m_name, $term);
-
+        foreach ($patients as $p) {
             $results[] = [
-                'label' => "{$name} ({$code}) [Father's Name - {$fathers_name}] [Mother's Name - {$mothers_name}]",
-                'url'   => route('patients.show', $patient->id),
+                'label' => "[Patient] {$p->name} ({$p->patient_code}) | Phone: {$p->phone}",
+                'url'   => route('patients.show', $p->id),
+                'group' => 'Patients',
+            ];
+        }
+
+        /* ==========================
+       2️⃣ Doctors
+    ========================== */
+        $doctors = Doctor::query()
+            ->where(function ($q) use ($term) {
+                $q->where('name', 'like', "%{$term}%")
+                    ->orWhere('email', 'like', "%{$term}%")
+                    ->orWhere('phone', 'like', "%{$term}%")
+                    ->orWhere('specialization', 'like', "%{$term}%");
+            })
+            ->latest()
+            ->limit(10)
+            ->get();
+
+        foreach ($doctors as $d) {
+            $results[] = [
+                'label' => "[Doctor] {$d->name} | {$d->specialization} | Phone: {$d->phone}",
+                'url'   => route('doctors.show', $d->id),
+                'group' => 'Doctors',
+            ];
+        }
+
+        /* ==========================
+       3️⃣ Appointments
+    ========================== */
+        $appointments = Appointment::with(['doctor', 'patient'])
+            ->where(function ($q) use ($term) {
+                $q->whereHas('patient', fn($q2) => $q2->where('name', 'like', "%{$term}%"))
+                    ->orWhereHas('doctor', fn($q2) => $q2->where('name', 'like', "%{$term}%"))
+                    ->orWhere('status', 'like', "%{$term}%");
+            })
+            ->when($parsedDate, fn($q) => $q->whereDate('appointment_date', $parsedDate))
+            ->latest()
+            ->limit(10)
+            ->get();
+
+        foreach ($appointments as $a) {
+            $results[] = [
+                'label' => "[Appointment] {$a->patient->name} with Dr. {$a->doctor->name} on {$a->appointment_date} ({$a->status})",
+                'url'   => route('appointments.show', $a->id),
+                'group' => 'Appointments',
+            ];
+        }
+
+        /* ==========================
+       4️⃣ Bills
+    ========================== */
+        $bills = Bill::with('patient')
+            ->whereHas('patient', fn($q) => $q->where('name', 'like', "%{$term}%"))
+            ->orWhere('total_amount', 'like', "%{$term}%")
+            ->latest()
+            ->limit(10)
+            ->get();
+
+        foreach ($bills as $b) {
+            $results[] = [
+                'label' => "[Bill] {$b->patient->name} | Total: {$b->total_amount} BDT",
+                'url'   => route('bills.show', $b->id),
+                'group' => 'Bills',
             ];
         }
 

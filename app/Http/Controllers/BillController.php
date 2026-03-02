@@ -2,63 +2,58 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Controller;
+use App\Models\Bill;
+use App\Models\Patient;
 use Illuminate\Http\Request;
 
 class BillController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $bills = Bill::with('patient')->latest()->paginate(10);
+        return view('backend.bill.index', compact('bills'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        $patients = Patient::all();
+        return view('backend.bill.create', compact('patients'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'patient_id' => 'required',
+        ]);
+
+        $total =
+            ($request->consultation_fee ?? 0) +
+            ($request->medicine_charge ?? 0) +
+            ($request->test_charge ?? 0);
+
+        Bill::create([
+            'patient_id'        => $request->patient_id,
+            'consultation_fee'  => $request->consultation_fee,
+            'medicine_charge'   => $request->medicine_charge,
+            'test_charge'       => $request->test_charge,
+            'total_amount'      => $total,
+        ]);
+
+        return redirect()->route('bills.index')
+            ->with('success', 'Bill generated successfully.');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function show(Bill $bill)
     {
-        //
+        return view('backend.bill.show', compact('bill'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function destroy(Bill $bill)
     {
-        //
-    }
+        $bill->delete();
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        return redirect()->route('bills.index')
+            ->with('success', 'Bill deleted successfully.');
     }
 }
