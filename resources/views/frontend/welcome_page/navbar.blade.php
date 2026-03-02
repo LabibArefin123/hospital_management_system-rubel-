@@ -38,7 +38,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="#specialist" class="nav-link custom-link">Doctors</a>
+                    <a href="#doctors" class="nav-link custom-link">Doctors</a>
                 </li>
 
                 <li class="nav-item">
