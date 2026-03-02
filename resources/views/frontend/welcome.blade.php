@@ -16,16 +16,9 @@
     @include('frontend.welcome_page.department')
 
     {{-- Hospital Services --}}
+    @include('frontend.welcome_page.doctors')
+    
     @include('frontend.welcome_page.services')
-
-    {{-- Our Facilities --}}
-    @include('frontend.welcome_page.facilities')
-
-    {{-- Our Specialist Doctors --}}
-    @include('frontend.welcome_page.specialist')
-
-    {{-- Hospital Statistics --}}
-    @include('frontend.welcome_page.stat')
 
     {{-- Footer --}}
     @include('frontend.welcome_page.footer')

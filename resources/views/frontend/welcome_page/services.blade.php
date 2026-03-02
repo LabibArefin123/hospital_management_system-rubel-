@@ -1,84 +1,61 @@
-<section id="services" class="content py-5 bg-white">
+<section id="services" class="content py-5 bg-light">
     <link rel="stylesheet" href="{{ asset('css/frontend/custom_service.css') }}">
+
     <div class="container">
         <div class="text-center mb-5">
             <h3 class="fw-bold">Our Services</h3>
             <p class="text-muted mt-2">
-                Trusted colorectal care delivered with compassion, expertise, and modern treatment options.
+                Lifetime City Hospital provides quality healthcare services with professional care and modern
+                facilities.
             </p>
         </div>
 
-        <h5 class="fw-semibold mb-2">Comprehensive Colorectal Care</h5>
-        <p class="mb-4">
-            At
-            <strong>
-                <a href="https://fazlulhaquehospital.com/" target="_blank"
-                    class="dev-link fw-bold text-decoration-none">
-                    {{ $orgName }} (DFCH)
-                </a>
-            </strong>,
-            we provide complete diagnosis and treatment for colorectal and anal conditions.
-            Our goal is to ensure comfort, clear communication, and the best possible recovery for every patient.
-        </p>
-
         <div class="row g-4">
-            <!-- Left Side -->
-            <div class="col-md-6">
-                <div class="service-card h-100 p-4">
-                    <h5 class="fw-semibold mb-3">Surgical Expertise</h5>
-                    <ul class="service-list">
-                        <li>
-                            <i class="arrow-icon">➜</i>
-                            Treatment for piles, anal fissure, fistula, and other colorectal conditions
-                        </li>
-                        <li>
-                            <i class="arrow-icon">➜</i>
-                            Advanced surgical care for colon and rectal cancer
-                        </li>
-                        <li>
-                            <i class="arrow-icon">➜</i>
-                            Colostomy and ileostomy procedures with careful post-operative support
-                        </li>
-                        <li>
-                            <i class="arrow-icon">➜</i>
-                            Management of ulcerative colitis, Crohn’s disease, and IBS
-                        </li>
-                        <li>
-                            <i class="arrow-icon">➜</i>
-                            Specialized care for rectal prolapse, diverticulitis, and related disorders
-                        </li>
-                    </ul>
+
+            <!-- General Consultation -->
+            <div class="col-md-3 col-sm-6">
+                <div class="service-card text-center p-4 h-100">
+                    <i class="bi bi-person-check fs-1 text-success mb-3"></i>
+                    <h6 class="fw-semibold">General Consultation</h6>
+                    <p class="small text-muted">
+                        Expert medical consultation with experienced doctors for accurate diagnosis and treatment.
+                    </p>
                 </div>
             </div>
 
-            <!-- Right Side -->
-            <div class="col-md-6">
-                <div class="service-card h-100 p-4">
-                    <h5 class="fw-semibold mb-3">Advanced Techniques</h5>
-                    <ul class="service-list">
-                        <li>
-                            <i class="arrow-icon">➜</i>
-                            <strong>Double Stapling for Rectal Cancer:</strong>
-                            Helps preserve natural bowel function and reduce the need for permanent colostomy
-                        </li>
-                        <li>
-                            <i class="arrow-icon">➜</i>
-                            <strong>Longo Operation for Hemorrhoids:</strong>
-                            Minimally invasive treatment with less pain and faster recovery
-                        </li>
-                        <li>
-                            <i class="arrow-icon">➜</i>
-                            <strong>Seton Technique for Complex Fistula:</strong>
-                            Safe and effective management for complex fistula cases
-                        </li>
-                        <li>
-                            <i class="arrow-icon">➜</i>
-                            <strong>Laser Surgery:</strong>
-                            A modern option offering minimal discomfort and quicker healing
-                        </li>
-                    </ul>
+            <!-- Appointment Booking -->
+            <div class="col-md-3 col-sm-6">
+                <div class="service-card text-center p-4 h-100">
+                    <i class="bi bi-calendar-check fs-1 text-success mb-3"></i>
+                    <h6 class="fw-semibold">Easy Appointments</h6>
+                    <p class="small text-muted">
+                        Quick and convenient appointment scheduling for better patient management.
+                    </p>
                 </div>
             </div>
+
+            <!-- Diagnostic Services -->
+            <div class="col-md-3 col-sm-6">
+                <div class="service-card text-center p-4 h-100">
+                    <i class="bi bi-heart-pulse fs-1 text-success mb-3"></i>
+                    <h6 class="fw-semibold">Diagnostic Services</h6>
+                    <p class="small text-muted">
+                        Modern diagnostic facilities to support accurate and effective medical treatment.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Billing & Records -->
+            <div class="col-md-3 col-sm-6">
+                <div class="service-card text-center p-4 h-100">
+                    <i class="bi bi-receipt fs-1 text-success mb-3"></i>
+                    <h6 class="fw-semibold">Billing & Records</h6>
+                    <p class="small text-muted">
+                        Transparent billing system with organized patient records management.
+                    </p>
+                </div>
+            </div>
+
         </div>
     </div>
 </section>
