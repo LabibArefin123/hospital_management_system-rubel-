@@ -127,31 +127,10 @@
                         </div>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary" id="updateProfileBtn">Update Profile</button>
+                <button type="submit" class="btn btn-primary">Update Profile</button>
                 <div class="mt-4" style="height:50px;"></div>
             </form>
         </div>
 
     </div>
-    <script>
-        // SweetAlert for Profile Update Button
-        document.getElementById('updateProfileBtn').addEventListener('click', function(e) {
-            e.preventDefault(); // Prevent form submission
-
-            Swal.fire({
-                title: 'Are you sure?',
-                text: "Do you want to update your profile?",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonText: 'Yes, update it!',
-                cancelButtonText: 'No, cancel'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    document.getElementById('profileUpdateForm').submit(); // Submit the form if confirmed
-                }
-            });
-        });
-
-        // Disable back button and warn user about leaving with unsaved changes
-    </script>
 @endsection
