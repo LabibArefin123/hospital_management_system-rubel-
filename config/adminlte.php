@@ -370,7 +370,7 @@ return [
         ],
         [
             'text'    => 'Patient Management',
-            'icon'    => 'fas fa-user-procedures',
+            'icon'    => 'bi bi-person-heart',
             'submenu' => [
                 [
                     'text'  => 'Patient List',
@@ -382,7 +382,7 @@ return [
         ],
         [
             'text'    => 'Appointment Manage',
-            'icon'    => 'fas fa-calender-check',
+            'icon'    => 'fas fa-calendar-check',
             'submenu' => [
                 [
                     'text'  => 'Appointment List',

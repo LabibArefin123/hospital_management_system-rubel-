@@ -40,6 +40,34 @@
                                 readonly>
                         </div>
                     </div>
+                    <div class="col-md-6">
+                        <div class="form-group ">
+                            <label>Phone 1</label>
+                            <input type="text" class="form-control" value="{{ $organization->phone_1 }}"
+                                readonly>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group ">
+                            <label>Phone 2</label>
+                            <input type="text" class="form-control" value="{{ $organization->phone_2 }}"
+                                readonly>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group ">
+                            <label>Landphone 1</label>
+                            <input type="text" class="form-control" value="{{ $organization->land_phone_1 }}"
+                                readonly>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group ">
+                            <label>Landphone 2</label>
+                            <input type="text" class="form-control" value="{{ $organization->land_phone_2 }}"
+                                readonly>
+                        </div>
+                    </div>
                     <div class="col-md-6 mb-3">
                         <label class="fw-semibold">Organization Logo</label>
 

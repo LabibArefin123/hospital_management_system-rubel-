@@ -37,24 +37,29 @@
         </div>
 
         {{-- GLOBAL SELECT ALL --}}
-        <div class="card border-primary mb-4">
-            <div class="card-body d-flex justify-content-between align-items-center">
-                <h5 class="mb-0 text-primary fw-bold">
-                    All Permissions
-                </h5>
+        <div class="card border-primary mb-4 mt-4">
+            <div class="card-body">
 
-                <div class="d-flex gap-2">
-                    <button type="button" class="btn btn-sm btn-primary" id="selectAllPermissions">
-                        Select All
-                    </button>
+                <div class="d-flex align-items-center">
 
-                    <button type="button" class="btn btn-sm btn-danger" id="unselectAllPermissions">
-                        Unselect All
-                    </button>
+                    <h5 class="mb-0 text-primary fw-bold">
+                        All Permissions
+                    </h5>
+
+                    <div class="ms-auto d-flex gap-2">
+                        <button type="button" class="btn btn-sm btn-primary" id="selectAllPermissions">
+                            Select All
+                        </button>
+
+                        <button type="button" class="btn btn-sm btn-danger" id="unselectAllPermissions">
+                            Unselect All
+                        </button>
+                    </div>
+
                 </div>
+
             </div>
         </div>
-
 
         @foreach ($groupedPermissions as $group => $groupPermissions)
             <div class="d-flex justify-content-between align-items-center mt-4">
