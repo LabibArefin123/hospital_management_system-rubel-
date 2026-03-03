@@ -16,22 +16,22 @@
                 @csrf
                 <div class="row">
 
-                    <div class="form-group col-md-6 mb-3">
+                    <div class="form-group col-md-6">
                         <label>Doctor Name *</label>
                         <input type="text" name="name" class="form-control">
                     </div>
 
-                    <div class="form-group col-md-6 mb-3">
+                    <div class="form-group col-md-6">
                         <label>Email *</label>
                         <input type="email" name="email" class="form-control">
                     </div>
 
-                    <div class="form-group col-md-6 mb-3">
+                    <div class="form-group col-md-6">
                         <label>Phone</label>
                         <input type="text" name="phone" class="form-control">
                     </div>
 
-                    <div class="form-group col-md-6 mb-3">
+                    <div class="form-group col-md-6">
                         <label>Specialization *</label>
                         <select name="specialization" class="form-control">
                             <option>Cardiologist</option>
@@ -41,7 +41,7 @@
                         </select>
                     </div>
 
-                    <div class="form-group col-md-6 mb-3">
+                    <div class="form-group col-md-6">
                         <label>Availability</label>
                         <select name="is_available" class="form-control">
                             <option value="1">Available</option>

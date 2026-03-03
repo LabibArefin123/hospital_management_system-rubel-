@@ -18,17 +18,17 @@
 
                 <div class="row">
 
-                    <div class="form-group col-md-6 mb-3">
+                    <div class="form-group col-md-6">
                         <label>Name *</label>
                         <input type="text" name="name" class="form-control" value="{{ old('name', $patient->name) }}">
                     </div>
 
-                    <div class="form-group col-md-3 mb-3">
+                    <div class="form-group col-md-3">
                         <label>Age *</label>
                         <input type="number" name="age" class="form-control" value="{{ old('age', $patient->age) }}">
                     </div>
 
-                    <div class="form-group col-md-3 mb-3">
+                    <div class="form-group col-md-3">
                         <label>Gender *</label>
                         <select name="gender" class="form-control">
                             @foreach (['Male', 'Female', 'Other'] as $gender)
@@ -39,13 +39,13 @@
                         </select>
                     </div>
 
-                    <div class="form-group col-md-6 mb-3">
+                    <div class="form-group col-md-6">
                         <label>Phone</label>
                         <input type="text" name="phone" class="form-control"
                             value="{{ old('phone', $patient->phone) }}">
                     </div>
 
-                    <div class="form-group col-md-6 mb-3">
+                    <div class="form-group col-md-6">
                         <label>Blood Group</label>
                         <input type="text" name="blood_group" class="form-control"
                             value="{{ old('blood_group', $patient->blood_group) }}">

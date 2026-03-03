@@ -16,7 +16,7 @@
                 @csrf
                 <div class="row">
 
-                    <div class="form-group col-md-6 mb-3">
+                    <div class="form-group col-md-6">
                         <label>Patient *</label>
                         <select name="patient_id" class="form-control">
                             <option value="">-- Select Patient --</option>
@@ -29,7 +29,7 @@
                         </select>
                     </div>
 
-                    <div class="form-group col-md-6 mb-3">
+                    <div class="form-group col-md-6">
                         <label>Doctor *</label>
                         <select name="doctor_id" class="form-control">
                             <option value="">-- Select Doctor --</option>
@@ -41,19 +41,19 @@
                         </select>
                     </div>
 
-                    <div class="form-group col-md-6 mb-3">
+                    <div class="form-group col-md-6">
                         <label>Date *</label>
                         <input type="date" name="appointment_date" class="form-control"
                             value="{{ old('appointment_date') }}">
                     </div>
 
-                    <div class="form-group col-md-6 mb-3">
+                    <div class="form-group col-md-6">
                         <label>Time *</label>
                         <input type="time" name="appointment_time" class="form-control"
                             value="{{ old('appointment_time') }}">
                     </div>
 
-                    <div class="form-group col-md-6 mb-3">
+                    <div class="form-group col-md-6">
                         <label>Status *</label>
                         <select name="status" class="form-control">
                             @foreach (['Pending', 'Approved', 'Completed'] as $status)

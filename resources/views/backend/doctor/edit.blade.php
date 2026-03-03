@@ -18,24 +18,24 @@
 
                 <div class="row">
 
-                    <div class="form-group col-md-6 mb-3">
+                    <div class="form-group col-md-6">
                         <label>Name *</label>
                         <input type="text" name="name" class="form-control" value="{{ old('name', $doctor->name) }}">
                     </div>
 
-                    <div class="form-group col-md-6 mb-3">
+                    <div class="form-group col-md-6">
                         <label>Email *</label>
                         <input type="email" name="email" class="form-control"
                             value="{{ old('email', $doctor->email) }}">
                     </div>
 
-                    <div class="form-group col-md-6 mb-3">
+                    <div class="form-group col-md-6">
                         <label>Phone</label>
                         <input type="text" name="phone" class="form-control"
                             value="{{ old('phone', $doctor->phone) }}">
                     </div>
 
-                    <div class="form-group col-md-6 mb-3">
+                    <div class="form-group col-md-6">
                         <label>Specialization *</label>
                         <select name="specialization" class="form-control">
                             @foreach (['Cardiologist', 'Neurologist', 'Orthopedic', 'Pediatrician'] as $spec)
@@ -47,7 +47,7 @@
                         </select>
                     </div>
 
-                    <div class="form-group col-md-6 mb-3">
+                    <div class="form-group col-md-6">
                         <label>Status</label>
                         <select name="is_available" class="form-control">
                             <option value="1" {{ $doctor->is_available ? 'selected' : '' }}>Available</option>

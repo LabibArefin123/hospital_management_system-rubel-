@@ -17,18 +17,18 @@ class RoleController extends Controller
 
     public function create()
     {
-        $routes = collect(Route::getRoutes())
-            ->filter(function ($route) {
-                $middlewares = $route->gatherMiddleware();
-                return $route->getName() &&
-                    $route->getAction('controller') &&
-                    collect($middlewares)->contains('auth');
-            })
-            ->groupBy(function ($route) {
-                return class_basename(explode('@', $route->getActionName())[0]);
-            });
+        // Paginate permissions (same as edit)
+        $permissions = Permission::orderBy('name')->paginate(500);
 
-        return view('backend.setting_management.roles_and_permission.roles.create', compact('routes'));
+        // Group by first part before dot (example: patients.index -> patients)
+        $groupedPermissions = $permissions->getCollection()->groupBy(function ($permission) {
+            return explode('.', $permission->name)[0];
+        });
+
+        return view(
+            'backend.setting_management.roles_and_permission.roles.create',
+            compact('permissions', 'groupedPermissions')
+        );
     }
 
     public function store(Request $request)
